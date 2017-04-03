@@ -42,6 +42,7 @@ class rex_effect_yfeed extends rex_effect_abstract
         }
 
         $media = $this->media;
+        $media->setMediaFilename($id.'.yfeed');
         $media->setImage($img);
         $media->setFormat($match[1]);
         $media->setHeader('Content-Type', 'image/'.$match[1]);
