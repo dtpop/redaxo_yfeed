@@ -11,5 +11,9 @@
  */
 
 if (rex_addon::get('cronjob')->isAvailable()) {
-    rex_cronjob_manager::registerType('rex_cronjob_yfeed');
+    rex_cronjob_manager::registerType(rex_cronjob_yfeed::class);
+}
+
+if (rex_addon::get('media_manager')->isAvailable()) {
+    rex_media_manager::addEffect(rex_effect_yfeed::class);
 }
