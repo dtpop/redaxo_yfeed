@@ -44,10 +44,11 @@ class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
         );
         $parser->disableContentFiltering();
         $feed = $parser->execute();
-
+        
         /** @var Item $rssItem */
         foreach ($feed->getItems() as $rssItem) {
             $item = new rex_yfeed_item($this->streamId, $rssItem->getId());
+            $item->setRaw($rssItem);
             $item->setTitle($rssItem->getTitle());
             $item->setContentRaw($rssItem->getContent());
 
@@ -61,7 +62,6 @@ class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
             if ($rssItem->getEnclosureUrl()) {
                 $item->setMedia($rssItem->getEnclosureUrl());
             }
-            $item->setRaw($rssItem);
             
             $this->updateCount($item);
             $item->save();
